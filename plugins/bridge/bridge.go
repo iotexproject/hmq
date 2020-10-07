@@ -33,6 +33,9 @@ type Elements struct {
 const (
 	//Kafka plugin name
 	Kafka = "kafka"
+
+	//Minio plugin name
+	Minio = "minio"
 )
 
 type BridgeMQ interface {
@@ -43,6 +46,8 @@ func NewBridgeMQ(name string) BridgeMQ {
 	switch name {
 	case Kafka:
 		return InitKafka()
+	case Minio:
+		return InitMinio()
 	default:
 		return &mockMQ{}
 	}

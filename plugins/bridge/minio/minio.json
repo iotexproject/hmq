@@ -1,0 +1,9 @@
+{
+    "endpoint": "minio",
+    "region": "local",
+    "ak": "xxxxxxx",
+    "sk": "xxxxxxx",
+    "ssl": true,
+    "bucket": "pebble-store",
+    "path": ""
+}
