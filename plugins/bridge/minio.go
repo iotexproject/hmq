@@ -82,7 +82,12 @@ func (m *minioP) Publish(e *Elements) error {
 	timeStamp := time.Now().UTC().UnixNano()
 	ctx := context.Background()
 	reader := strings.NewReader(e.Payload)
-	info, err := m.minioClient.PutObject(ctx, m.minioConfig.Bucket, fmt.Sprintf("%s/%s/%d", m.minioConfig.Path, e.Topic, timeStamp), reader, int64(reader.Size()),
+	objectName := fmt.Sprintf("%s/%d", e.Topic, timeStamp)
+	if m.minioConfig.Path != "" {
+		objectName = fmt.Sprintf("%s/%s", m.minioConfig.Path, objectName)
+	}
+
+	info, err := m.minioClient.PutObject(ctx, m.minioConfig.Bucket, objectName, reader, int64(reader.Size()),
 		minio.PutObjectOptions{ContentType: "text"})
 	if err != nil {
 		log.Fatal("Upload ", zap.Error(err))

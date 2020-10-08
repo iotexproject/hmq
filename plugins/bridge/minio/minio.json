@@ -1,9 +1,9 @@
 {
-    "endpoint": "minio",
+    "endpoint": "http://minio:9000",
     "region": "local",
     "ak": "xxxxxxx",
     "sk": "xxxxxxx",
-    "ssl": true,
+    "ssl": false,
     "bucket": "pebble-store",
     "path": ""
 }
