@@ -82,7 +82,7 @@ func (m *minioP) Publish(e *Elements) error {
 	timeStamp := time.Now().UTC().UnixNano()
 	ctx := context.Background()
 	reader := strings.NewReader(e.Payload)
-	objectName := fmt.Sprintf("%s/%d", e.Topic, timeStamp)
+	objectName := fmt.Sprintf("%s/%d", e.ClientID, timeStamp)
 	if m.minioConfig.Path != "" {
 		objectName = fmt.Sprintf("%s/%s", m.minioConfig.Path, objectName)
 	}
