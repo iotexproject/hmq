@@ -86,6 +86,7 @@ func (m *minioP) Publish(e *Elements) error {
 	if m.minioConfig.Path != "" {
 		objectName = fmt.Sprintf("%s/%s", m.minioConfig.Path, objectName)
 	}
+	log.Info("Put object", zap.String("name", objectName))
 
 	info, err := m.minioClient.PutObject(ctx, m.minioConfig.Bucket, objectName, reader, int64(reader.Size()),
 		minio.PutObjectOptions{ContentType: "text"})
