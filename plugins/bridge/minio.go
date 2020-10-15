@@ -79,10 +79,14 @@ func (m *minioP) connect() {
 
 //Save to minio
 func (m *minioP) Publish(e *Elements) error {
+	if e.Action != Publish || e.Topic == "" {
+		return nil
+	}
+
 	timeStamp := time.Now().UTC().UnixNano()
 	ctx := context.Background()
 	reader := strings.NewReader(e.Payload)
-	objectName := fmt.Sprintf("%s/%d", e.ClientID, timeStamp)
+	objectName := fmt.Sprintf("%s/%d", e.Topic, timeStamp)
 	if m.minioConfig.Path != "" {
 		objectName = fmt.Sprintf("%s/%s", m.minioConfig.Path, objectName)
 	}
